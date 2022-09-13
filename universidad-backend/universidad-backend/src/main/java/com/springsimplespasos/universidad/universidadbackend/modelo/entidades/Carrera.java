@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "carreras")
-
 public class Carrera implements Serializable {
 
     @Id
@@ -16,15 +15,15 @@ public class Carrera implements Serializable {
     private Integer id;
     @Column(nullable = false, unique = true, length = 80)
     private String nombre;
-    @Column (name = "cantidad_materias")
-    private Integer cantidadMaterias;
-    @Column (name = "cantidad_anios")
+    @Column(name = "cantidad_materias")
+    private Integer cantidaMaterias;
+    @Column(name = "cantidad_anios")
     private Integer cantidadAnios;
-    @Column (name = "fecha_alta")
+    @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
-    @Column (name = "fecha_modificacion")
+    @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
-    @ManyToMany(
+    @OneToMany(
             mappedBy = "carrera",
             fetch = FetchType.LAZY
     )
@@ -38,10 +37,10 @@ public class Carrera implements Serializable {
     public Carrera() {
     }
 
-    public Carrera(Integer id, String nombre, Integer cantidadMaterias, Integer cantidadAnios) {
+    public Carrera(Integer id, String nombre, Integer cantidaMaterias, Integer cantidadAnios) {
         this.id = id;
         this.nombre = nombre;
-        this.cantidadMaterias = cantidadMaterias;
+        this.cantidaMaterias = cantidaMaterias;
         this.cantidadAnios = cantidadAnios;
     }
 
@@ -61,12 +60,12 @@ public class Carrera implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getCantidadMaterias() {
-        return cantidadMaterias;
+    public Integer getCantidaMaterias() {
+        return cantidaMaterias;
     }
 
-    public void setCantidadMaterias(Integer cantidadMaterias) {
-        this.cantidadMaterias = cantidadMaterias;
+    public void setCantidaMaterias(Integer cantidaMaterias) {
+        this.cantidaMaterias = cantidaMaterias;
     }
 
     public Integer getCantidadAnios() {
@@ -109,13 +108,13 @@ public class Carrera implements Serializable {
         this.profesores = profesores;
     }
 
-    @PrePersist  //se ejecuta antes de hacer la persistencia al objeto.
-    private void  antesDePersistir(){
+    @PrePersist
+    private void antesDePersistir() {
         this.fechaAlta = LocalDateTime.now();
     }
 
     @PreUpdate
-    private void antesDeUpdate(){
+    private void antesDeUpdate() {
         this.fechaModificacion = LocalDateTime.now();
     }
 
@@ -124,7 +123,7 @@ public class Carrera implements Serializable {
         return "Carrera{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", cantidadMaterias=" + cantidadMaterias +
+                ", cantidaMaterias=" + cantidaMaterias +
                 ", cantidadAnios=" + cantidadAnios +
                 ", fechaAlta=" + fechaAlta +
                 ", fechaModificacion=" + fechaModificacion +
@@ -144,3 +143,4 @@ public class Carrera implements Serializable {
         return Objects.hash(id, nombre);
     }
 }
+

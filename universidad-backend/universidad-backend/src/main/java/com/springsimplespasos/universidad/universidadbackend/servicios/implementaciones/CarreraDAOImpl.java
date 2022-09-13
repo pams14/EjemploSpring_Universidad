@@ -5,32 +5,36 @@ import com.springsimplespasos.universidad.universidadbackend.repositorios.Carrer
 import com.springsimplespasos.universidad.universidadbackend.servicios.contratos.CarreraDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-public class CarreraDAOImpl implements CarreraDAO {
+public class CarreraDAOImpl extends GenericoDAOImpl<Carrera, CarreraRpository> implements CarreraDAO {
+
 
     @Autowired
-    private CarreraRpository rpository;
-
-    @Override
-    public Optional<Carrera> findById(Integer id) {
-        return Optional.empty();
+    public CarreraDAOImpl(CarreraRpository repository) {
+        super(repository);
     }
 
     @Override
-    public Carrera save(Carrera carrera) {
-        return null;
+    @Transactional(readOnly = true)
+    public Iterable<Carrera> findCarrerasByNombreContains(String nombre) {
+        return repository.findCarrerasByNombreContains(nombre);
     }
 
     @Override
-    public Iterable<Carrera> findAll() {
-        return null;
+    @Transactional(readOnly = true)
+    public Iterable<Carrera> findCarrerasByNombreContainsIgnoreCase(String nombre) {
+        return repository.findCarrerasByNombreContainsIgnoreCase(nombre);
     }
 
     @Override
-    public void deleteById(Integer id) {
-
+    @Transactional(readOnly = true)
+    public Iterable<Carrera> findCarrerasByCantidadAniosAfter(Integer cantidadAnios) {
+        return repository.findCarrerasByCantidadAniosAfter(cantidadAnios);
     }
+
+
 }
