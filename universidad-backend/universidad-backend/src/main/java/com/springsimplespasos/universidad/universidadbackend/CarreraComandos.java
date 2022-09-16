@@ -43,9 +43,8 @@ public class CarreraComandos implements CommandLineRunner {
         carrerasIngoreCase1.forEach(System.out::println);
         carrerasIngoreCase2.forEach(System.out::println);*/
 
-
-        List<Carrera> carrerasPorAnio = (List<Carrera>) servicio.findCarrerasByCantidadAniosAfter(4);
-        carrerasPorAnio.forEach(System.out::println);
+        /*List<Carrera> carrerasPorAnio = (List<Carrera>) servicio.findCarrerasByCantidadAniosAfter(4);
+        carrerasPorAnio.forEach(System.out::println);*/
 
     }
 
